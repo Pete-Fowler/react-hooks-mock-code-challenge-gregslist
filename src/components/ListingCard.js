@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 function ListingCard({ description, image, location }) {
-  // const [ liked, setLiked ] = useState(false);
+  const [ liked, setLiked ] = useState(false);
 
-  // const btnClass = liked ? "emoji-button favorite active" 
-  //   : "emoji-button favorite";
-  // const btnEmoji = liked ? '★' : '☆';
+  const btnClass = liked ? "emoji-button favorite active" 
+    : "emoji-button favorite";
+  const btnEmoji = liked ? '★' : '☆';
 
-  // const like = () => {
-  //   setLiked(liked => !liked);
-  // }
+  const like = () => {
+    setLiked(liked => !liked);
+  }
 
   return (
     <li className="card">
@@ -18,7 +18,7 @@ function ListingCard({ description, image, location }) {
         <img src={image} alt={description} />
       </div>
       <div className="details">
-        {/* <button className={btnClass} onClick={like}>{btnEmoji}</button> */}
+        <button className={btnClass} onClick={like}>{btnEmoji}</button>
         <strong>{description}</strong>
         <span> · {location}</span>
         <button className="emoji-button delete">🗑</button>
