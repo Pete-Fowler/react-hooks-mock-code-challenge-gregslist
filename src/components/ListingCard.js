@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 function ListingCard({ description, image, location }) {
+  // const [ liked, setLiked ] = useState(false);
+
+  // const btnClass = liked ? "emoji-button favorite active" 
+  //   : "emoji-button favorite";
+  // const btnEmoji = liked ? '★' : '☆';
+
+  // const like = () => {
+  //   setLiked(liked => !liked);
+  // }
+
   return (
     <li className="card">
       <div className="image">
@@ -8,11 +18,7 @@ function ListingCard({ description, image, location }) {
         <img src={image} alt={description} />
       </div>
       <div className="details">
-        {false ? (
-          <button className="emoji-button favorite active">★</button>
-        ) : (
-          <button className="emoji-button favorite">☆</button>
-        )}
+        {/* <button className={btnClass} onClick={like}>{btnEmoji}</button> */}
         <strong>{description}</strong>
         <span> · {location}</span>
         <button className="emoji-button delete">🗑</button>
