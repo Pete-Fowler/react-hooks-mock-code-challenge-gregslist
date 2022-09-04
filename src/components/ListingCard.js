@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ListingCard({ description, image, location }) {
+function ListingCard({ id, description, image, location, deleteItem }) {
   const [ liked, setLiked ] = useState(false);
 
   const btnClass = liked ? "emoji-button favorite active" 
@@ -10,6 +10,13 @@ function ListingCard({ description, image, location }) {
 
   const like = () => {
     setLiked(liked => !liked);
+  }
+
+  function clickDelete() {
+    fetch(`http://localhost:6001/listings/${id}`, {
+      method: 'DELETE'
+    });
+    deleteItem(id);
   }
 
   return (
@@ -22,7 +29,7 @@ function ListingCard({ description, image, location }) {
         <button className={btnClass} onClick={like}>{btnEmoji}</button>
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <button className="emoji-button delete" onClick={clickDelete}>🗑</button>
       </div>
     </li>
   );
