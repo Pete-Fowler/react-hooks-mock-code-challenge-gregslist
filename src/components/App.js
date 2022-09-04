@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
+import NewItemForm from './NewItemForm';
 
 function App() {
   const [ listings, setListings ] = useState([]);
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ sorted, setSorted ] = useState('original');
+  const [ newItemView, setNewItemView ] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:6001/listings')
@@ -28,6 +30,11 @@ function App() {
     setSorted(string);
   }
 
+  function addItem(newItem) {
+    setListings(listings => [...listings, newItem]);
+    viewNewItemForm();
+  }
+
   const listingsShown = searchTerm !== '' 
       ? listings.filter(listing => 
       listing.description.includes(searchTerm)) 
@@ -46,14 +53,28 @@ function App() {
         return a.id - b.id;
       })
 
-      console.table(listingsShown);
+function viewNewItemForm() {
+  setNewItemView(newItemView => !newItemView);
+}
 
-  return (
+  return newItemView ? (
+    <div className="app">
+      <Header
+          searchTerm={searchTerm}
+          updateSearchTerm={updateSearchTerm}
+          updateSort={updateSort}
+          viewNewItemForm={viewNewItemForm}
+        />
+      <NewItemForm addItem={addItem}/>
+    </div>
+  ) 
+  : (
     <div className="app">
       <Header 
         searchTerm={searchTerm} 
         updateSearchTerm={updateSearchTerm}
         updateSort={updateSort}
+        viewNewItemForm={viewNewItemForm}
       />
       <ListingsContainer 
         listings={listingsShown} 
