@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
 
 function App() {
-  const [ listings, setListings ] = useState('');
+  const [ listings, setListings ] = useState([]);
 
-  fetch('http://localhost:6001/listings')
-    .then(res => res.json())
-    .then(data => {
-      setListings(listings => data);
-    })
+  useEffect(() => {
+    
+    fetch('http://localhost:6001/listings')
+      .then(res => res.json())
+      .then(data => {
+        setListings(data);
+      });
   
+  }, [])
+
   return (
     <div className="app">
       <Header />

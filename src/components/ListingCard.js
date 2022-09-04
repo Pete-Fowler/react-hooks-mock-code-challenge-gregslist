@@ -5,6 +5,7 @@ function ListingCard({ description, image, location }) {
 
   const btnClass = liked ? "emoji-button favorite active" 
     : "emoji-button favorite";
+  
   const btnEmoji = liked ? '★' : '☆';
 
   const like = () => {
